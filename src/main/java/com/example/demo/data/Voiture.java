@@ -39,6 +39,4 @@ public class Voiture {
         this.prix = prix;
     }
 
-
-
 }
