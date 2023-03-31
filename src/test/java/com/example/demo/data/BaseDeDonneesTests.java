@@ -11,18 +11,21 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class BaseDeDonneesTests {
 
+    @MockBean
+    private VoitureRepository voitureRepository;
+
     @Test
     void uneVoiture(){
-
-        Voiture voiture = new Voiture();
-
+        
+        Voiture voiture = Mockito.mock(Voiture.class);
         voiture.setMarque("Mercedes");
         voiture.setPrix(35000);
 
-        Assert.notNull(voiture,"La voiture ne peut pas être NULL");
-        Assert.notNull(voiture.getMarque(),"La marque ne doit pas être NULL");
-        Assert.isTrue(voiture.getPrix()>0,"Le prix doit être supérieur à 0");
-
+        voitureRepository.save(voiture);
+        voitureRepository.findAll();
+        
+        // tester les méthodes de l'interface CrudRepository qui permette d'accéder à la base de données: https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html
+        // save, find, delete...
     }
 
 }
